@@ -1,0 +1,91 @@
+Configure miss: gfind
+Configure miss: x86_64-unknown-linux-windres
+Configure miss: x86_64-unknown-linux-dllwrap
+Configure miss: x86_64-unknown-linux-objdump
+Configure miss: /usr/bin/gcc option to accept ISO C99
+Configure miss: x86_64-unknown-linux-ld
+Configure miss: whether ld understands -filelist
+Configure miss: x86_64-unknown-linux-strip
+Configure miss: x86_64-unknown-linux-libtool
+Configure miss: x86_64-unknown-linux-clang
+Configure miss: x86_64-unknown-linux-llc-6.0
+Configure miss: x86_64-unknown-linux-llc
+Configure miss: llc-6.0
+Configure miss: llc
+Configure miss: x86_64-unknown-linux-opt-6.0
+Configure miss: x86_64-unknown-linux-opt
+Configure miss: opt-6.0
+Configure miss: opt
+Configure miss: whether C compiler is clang
+Configure miss: whether C compiler has an LLVM back end
+Configure miss: .subsections_via_symbols
+Configure miss: x86_64-unknown-linux-ar
+Configure miss: gsed
+Configure miss: time
+Configure miss: pxz
+Configure miss: gpatch
+Configure miss: dtrace
+Configure miss: HsColour
+Configure miss: xelatex
+Configure miss: happy
+Configure miss: alex
+Configure miss: sys/timers.h usability
+Configure miss: sys/timers.h presence
+Configure miss: sys/timers.h
+Configure miss: winsock.h usability
+Configure miss: winsock.h presence
+Configure miss: winsock.h
+Configure miss: sys/cpuset.h
+Configure miss: WinExec
+Configure miss: GetModuleFileName
+Configure miss: getclock
+Configure miss: closedir in -lmingwex
+Configure miss: ffi.h presence
+Configure miss: whether float word order is big endian
+Configure miss: leading underscore in symbol names
+Configure miss: printf$LDBLStub
+Configure miss: whether -lpthread is needed for pthreads... checking for pthread_create
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
+Configure miss: whether GCC supports __atomic_ builtins
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
+Configure miss: whether to use in-tree GMP
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
+Configure miss: sys/timers.h usability
+Configure miss: sys/timers.h presence
+Configure miss: sys/timers.h
+Configure miss: winsock.h usability
+Configure miss: winsock.h presence
+Configure miss: winsock.h
+Configure miss: sys/event.h usability
+Configure miss: sys/event.h presence
+Configure miss: sys/event.h
+Configure miss: getclock
+Configure miss: _chsize
+Configure miss: kevent
+Configure miss: kevent64
+Configure miss: whether F_OFD_SETLK is declared
+Configure miss: library containing locale_charset
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
+Configure miss: whether altzone is declared
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
+Configure miss: bsd/libutil.h usability
+Configure miss: bsd/libutil.h presence
+Configure miss: bsd/libutil.h
+Configure miss: struct stat.st_atimespec
+Configure miss: struct stat.st_mtimespec
+Configure miss: struct stat.st_ctimespec
+Configure miss: struct stat.st_atimensec
+Configure miss: struct stat.st_ctimensec
+Configure miss: struct stat.st_atime_n
+Configure miss: struct stat.st_mtime_n
+Configure miss: struct stat.st_ctime_n
+Configure miss: struct stat.st_uatime
+Configure miss: struct stat.st_umtime
+Configure miss: struct stat.st_uctime
+Configure miss: openpty
+Configure miss: /dev/ptc
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
+Configure miss: CreateSymbolicLinkW
+Configure miss: GetFinalPathNameByHandleW
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89

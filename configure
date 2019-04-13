@@ -1,0 +1,6 @@
+--target=x86_64-unknown-linux
+--host=x86_64-unknown-linux
+--build=x86_64-unknown-linux
+--disable-ld-override
+--with-system-libffi
+--with-ffi-includes="$(pkg-config --variable=includedir libffi)"

@@ -1,0 +1,26 @@
+From 587a5d30f2d0ae67760eb64b44832beb0ba5b195 Mon Sep 17 00:00:00 2001
+From: George T Kramer <george.t.kramer@intel.com>
+Date: Fri, 12 Apr 2019 14:14:43 -0700
+Subject: [PATCH] Pass libffi include dir to ghci cabal
+
+https://gitlab.haskell.org/ghc/ghc/merge_requests/768
+---
+ libraries/ghci/ghci.cabal.in | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/libraries/ghci/ghci.cabal.in b/libraries/ghci/ghci.cabal.in
+index 32ce79c..c6a683d 100644
+--- a/libraries/ghci/ghci.cabal.in
++++ b/libraries/ghci/ghci.cabal.in
+@@ -55,6 +55,8 @@ library
+             GHCi.Signals
+             GHCi.TH
+ 
++    include-dirs: @FFIIncludeDir@
++
+     exposed-modules:
+         GHCi.BreakArray
+         GHCi.BinaryArray
+-- 
+2.21.0
+

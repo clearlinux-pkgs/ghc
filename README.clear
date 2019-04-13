@@ -1,0 +1,97 @@
+BOOTSTRAPPING PROCESS
+=====================
+
+The bootstrap was performed by doing the following:
+1. Run a current Fedora Docker container.  Have a folder mounted from host to container for downloading RPMs.
+2. Use dnf to download ghc and all dependencies to mounted folder.
+3. Exit container
+4. Extract all ghc-* RPMs
+5. Remove etc and var folders from extraction
+6. Copy install extracted usr folder to /
+7. Run ghc-pkg recache
+8. Copy system package cache into corresponding extracted usr folder.  This can be found in the same directory as the package.cache.lock file.
+9. Tar up extracted usr folder from RPM extraction.
+10. Create a spec file that extracts the tarball and installs the usr folder into the build dest root.
+11. Build the spec file
+12. Get list of missing files from build.log, remove extra text that is not a missing file, sed replace leading spaces, and then sort unique append the list to the spec file.
+13. Rebuild the spec file
+14. Run make repoadd
+* You have bootstrapped GHC for building
+
+Bootstrap Spec File Header
+--------------------------
+
+Name:           ghc
+Version:        8.2.2
+Release:        0
+Summary:        Glasgow Haskell Compiler
+
+License:        GPL-3.0
+URL:            https://haskell.org/ghc/
+Source0:        http://localhost/gtkramer/ghc/ghc-8.2.2-fedora.tar
+
+%description
+GHC is a state-of-the-art, open source, compiler and interactive environment for the functional language Haskell.
+
+%prep
+%setup -q -n ghc-8.2.2
+
+%install
+mv %{_builddir}/ghc-8.2.2/usr/ %{buildroot}/
+
+%files
+%defattr(-,root,root,-)
+
+Commentary
+----------
+
+The important bits here are to not use the binary distribution from the website
+because it has problems linking statically, which the build process will
+inherently try to do.  There are options to try to influence this and change
+the behavior to dynamic linking, but they are either EOL'd or not fully
+supported yet.
+
+Instead, the solution is to use an existing pre-built one from a distrubtion
+that closely matches where Clear Linux puts its libraries (e.g. Fedora in
+/usr/lib64 rather than Arch Linux with /usr/lib).  This needs repackaged from
+the Fedora RPMs to remove the Fedora RPM metadata that is not compatibile with
+Clear Linux and to create a binary distribution of only the ghc bits.
+
+SOLVED BLOCKERS
+===============
+
+The platform needs to be x86_64-unknown-linux during configure.  This is what
+is reported by ghc on Arch Linux and Fedora when running:
+
+```
+ghc +RTS --info
+```
+
+During configure, this command is run and the output is checked against the
+target platform.  If they don't match, configure errors out saying that the
+desired platform does not match the GHC platform.
+
+Do not use the configure option --enable-distro-toolchain.  This is misleading
+because it will try to use touchy.exe rather than touch, which is a Windows
+executable that does not exist on Linux.
+
+The configure option --disable-ld-override is required in order for ghci cabal
+to properly resolve the linker location.
+
+The libffi include dir is not being properly passed through the build process.
+A patch is required to correct this.  This patch is required because libffi is
+packaged to store dev headers in a non-standard location.  While this should
+not be an issue because libffi offers a pkg-config file, ghc does not use
+pkg-config to identify from where to find the dev headers.
+
+APPROACH
+========
+
+Because the build system for ghc follows autotools, and creates files in
+semi-standard locations, this package should be able to be autospec'd.
+Instructions on building may be found here in the 'Building & Installing'
+section: https://gitlab.haskell.org/ghc/ghc
+
+However, there are plans to eventually drop autotools and in its place use
+their own custom buld system, hadrian.  It is currently not ready today and is
+in development.
