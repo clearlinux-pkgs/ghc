@@ -6,7 +6,7 @@
 #
 Name     : ghc
 Version  : 8.6.4
-Release  : 1
+Release  : 2
 URL      : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source0  : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source99 : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
@@ -101,7 +101,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555146834
+export SOURCE_DATE_EPOCH=1555172471
 export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static --target=x86_64-unknown-linux \
 --host=x86_64-unknown-linux \
@@ -109,10 +109,10 @@ export LDFLAGS="${LDFLAGS} -fno-lto"
 --disable-ld-override \
 --with-system-libffi \
 --with-ffi-includes="$(pkg-config --variable=includedir libffi)"
-make
+make %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1555146834
+export SOURCE_DATE_EPOCH=1555172471
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ghc
 cp LICENSE %{buildroot}/usr/share/package-licenses/ghc/LICENSE
