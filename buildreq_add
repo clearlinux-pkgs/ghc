@@ -1,10 +1,10 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-ghc
-Sphinx
-elfutils-dev
-numactl-dev
-gmp-dev
-ncurses-dev
-libffi-dev
 binutils-extras
+elfutils-dev
+ghc-dev
+gmp-dev
+libffi-dev
+ncurses-dev
+numactl-dev
+Sphinx

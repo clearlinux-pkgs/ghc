@@ -6,7 +6,7 @@
 #
 Name     : ghc
 Version  : 8.6.4
-Release  : 2
+Release  : 3
 URL      : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source0  : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source99 : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
