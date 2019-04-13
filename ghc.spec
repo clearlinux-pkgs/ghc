@@ -4,9 +4,10 @@
 #
 # Source0 file verified with key 0x2DE04D4E97DB64AD (ben@well-typed.com)
 #
+%define keepstatic 1
 Name     : ghc
 Version  : 8.6.4
-Release  : 3
+Release  : 5
 URL      : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source0  : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source99 : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
@@ -20,7 +21,7 @@ Requires: ghc-man = %{version}-%{release}
 BuildRequires : Sphinx
 BuildRequires : binutils-extras
 BuildRequires : elfutils-dev
-BuildRequires : ghc
+BuildRequires : ghc-dev
 BuildRequires : gmp-dev
 BuildRequires : libffi-dev
 BuildRequires : ncurses-dev
@@ -101,18 +102,18 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555172471
+export SOURCE_DATE_EPOCH=1555180867
 export LDFLAGS="${LDFLAGS} -fno-lto"
-%configure --disable-static --target=x86_64-unknown-linux \
+%configure  --target=x86_64-unknown-linux \
 --host=x86_64-unknown-linux \
 --build=x86_64-unknown-linux \
 --disable-ld-override \
 --with-system-libffi \
 --with-ffi-includes="$(pkg-config --variable=includedir libffi)"
-make %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1555172471
+export SOURCE_DATE_EPOCH=1555180867
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ghc
 cp LICENSE %{buildroot}/usr/share/package-licenses/ghc/LICENSE
@@ -832,6 +833,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/Cabal-2.4.0.1/Paths_Cabal.dyn_hi
 /usr/lib64/ghc-8.6.4/Cabal-2.4.0.1/Paths_Cabal.hi
 /usr/lib64/ghc-8.6.4/Cabal-2.4.0.1/Paths_Cabal.p_hi
+/usr/lib64/ghc-8.6.4/Cabal-2.4.0.1/libHSCabal-2.4.0.1.a
+/usr/lib64/ghc-8.6.4/Cabal-2.4.0.1/libHSCabal-2.4.0.1_p.a
 /usr/lib64/ghc-8.6.4/array-0.5.3.0/Data/Array.dyn_hi
 /usr/lib64/ghc-8.6.4/array-0.5.3.0/Data/Array.hi
 /usr/lib64/ghc-8.6.4/array-0.5.3.0/Data/Array.p_hi
@@ -878,6 +881,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/array-0.5.3.0/Data/Array/Unsafe.hi
 /usr/lib64/ghc-8.6.4/array-0.5.3.0/Data/Array/Unsafe.p_hi
 /usr/lib64/ghc-8.6.4/array-0.5.3.0/HSarray-0.5.3.0.o
+/usr/lib64/ghc-8.6.4/array-0.5.3.0/libHSarray-0.5.3.0.a
+/usr/lib64/ghc-8.6.4/array-0.5.3.0/libHSarray-0.5.3.0_p.a
 /usr/lib64/ghc-8.6.4/base-4.12.0.0/Control/Applicative.dyn_hi
 /usr/lib64/ghc-8.6.4/base-4.12.0.0/Control/Applicative.hi
 /usr/lib64/ghc-8.6.4/base-4.12.0.0/Control/Applicative.p_hi
@@ -1590,6 +1595,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/base-4.12.0.0/Unsafe/Coerce.dyn_hi
 /usr/lib64/ghc-8.6.4/base-4.12.0.0/Unsafe/Coerce.hi
 /usr/lib64/ghc-8.6.4/base-4.12.0.0/Unsafe/Coerce.p_hi
+/usr/lib64/ghc-8.6.4/base-4.12.0.0/libHSbase-4.12.0.0.a
+/usr/lib64/ghc-8.6.4/base-4.12.0.0/libHSbase-4.12.0.0_p.a
 /usr/lib64/ghc-8.6.4/bin/ghc
 /usr/lib64/ghc-8.6.4/bin/ghc-iserv
 /usr/lib64/ghc-8.6.4/bin/ghc-iserv-dyn
@@ -1630,6 +1637,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/binary-0.8.6.0/Data/Binary/Put.hi
 /usr/lib64/ghc-8.6.4/binary-0.8.6.0/Data/Binary/Put.p_hi
 /usr/lib64/ghc-8.6.4/binary-0.8.6.0/HSbinary-0.8.6.0.o
+/usr/lib64/ghc-8.6.4/binary-0.8.6.0/libHSbinary-0.8.6.0.a
+/usr/lib64/ghc-8.6.4/binary-0.8.6.0/libHSbinary-0.8.6.0_p.a
 /usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/Data/ByteString.dyn_hi
 /usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/Data/ByteString.hi
 /usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/Data/ByteString.p_hi
@@ -1700,6 +1709,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/Data/ByteString/Unsafe.hi
 /usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/Data/ByteString/Unsafe.p_hi
 /usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/HSbytestring-0.10.8.2.o
+/usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/libHSbytestring-0.10.8.2.a
+/usr/lib64/ghc-8.6.4/bytestring-0.10.8.2/libHSbytestring-0.10.8.2_p.a
 /usr/lib64/ghc-8.6.4/containers-0.6.0.1/Data/Containers/ListUtils.dyn_hi
 /usr/lib64/ghc-8.6.4/containers-0.6.0.1/Data/Containers/ListUtils.hi
 /usr/lib64/ghc-8.6.4/containers-0.6.0.1/Data/Containers/ListUtils.p_hi
@@ -1806,6 +1817,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/containers-0.6.0.1/Utils/Containers/Internal/TypeError.dyn_hi
 /usr/lib64/ghc-8.6.4/containers-0.6.0.1/Utils/Containers/Internal/TypeError.hi
 /usr/lib64/ghc-8.6.4/containers-0.6.0.1/Utils/Containers/Internal/TypeError.p_hi
+/usr/lib64/ghc-8.6.4/containers-0.6.0.1/libHScontainers-0.6.0.1.a
+/usr/lib64/ghc-8.6.4/containers-0.6.0.1/libHScontainers-0.6.0.1_p.a
 /usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/Control/DeepSeq.dyn_hi
 /usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/Control/DeepSeq.hi
 /usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/Control/DeepSeq.p_hi
@@ -1813,6 +1826,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/Control/DeepSeq/BackDoor.hi
 /usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/Control/DeepSeq/BackDoor.p_hi
 /usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/HSdeepseq-1.4.4.0.o
+/usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/libHSdeepseq-1.4.4.0.a
+/usr/lib64/ghc-8.6.4/deepseq-1.4.4.0/libHSdeepseq-1.4.4.0_p.a
 /usr/lib64/ghc-8.6.4/directory-1.3.3.0/HSdirectory-1.3.3.0.o
 /usr/lib64/ghc-8.6.4/directory-1.3.3.0/System/Directory.dyn_hi
 /usr/lib64/ghc-8.6.4/directory-1.3.3.0/System/Directory.hi
@@ -1838,6 +1853,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/directory-1.3.3.0/System/Directory/Internal/Windows.dyn_hi
 /usr/lib64/ghc-8.6.4/directory-1.3.3.0/System/Directory/Internal/Windows.hi
 /usr/lib64/ghc-8.6.4/directory-1.3.3.0/System/Directory/Internal/Windows.p_hi
+/usr/lib64/ghc-8.6.4/directory-1.3.3.0/libHSdirectory-1.3.3.0.a
+/usr/lib64/ghc-8.6.4/directory-1.3.3.0/libHSdirectory-1.3.3.0_p.a
 /usr/lib64/ghc-8.6.4/filepath-1.4.2.1/HSfilepath-1.4.2.1.o
 /usr/lib64/ghc-8.6.4/filepath-1.4.2.1/System/FilePath.dyn_hi
 /usr/lib64/ghc-8.6.4/filepath-1.4.2.1/System/FilePath.hi
@@ -1848,6 +1865,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/filepath-1.4.2.1/System/FilePath/Windows.dyn_hi
 /usr/lib64/ghc-8.6.4/filepath-1.4.2.1/System/FilePath/Windows.hi
 /usr/lib64/ghc-8.6.4/filepath-1.4.2.1/System/FilePath/Windows.p_hi
+/usr/lib64/ghc-8.6.4/filepath-1.4.2.1/libHSfilepath-1.4.2.1.a
+/usr/lib64/ghc-8.6.4/filepath-1.4.2.1/libHSfilepath-1.4.2.1_p.a
 /usr/lib64/ghc-8.6.4/ghc-8.6.4/Annotations.dyn_hi
 /usr/lib64/ghc-8.6.4/ghc-8.6.4/Annotations.hi
 /usr/lib64/ghc-8.6.4/ghc-8.6.4/Annotations.p_hi
@@ -3183,6 +3202,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/ghc-8.6.4/X86/Regs.dyn_hi
 /usr/lib64/ghc-8.6.4/ghc-8.6.4/X86/Regs.hi
 /usr/lib64/ghc-8.6.4/ghc-8.6.4/X86/Regs.p_hi
+/usr/lib64/ghc-8.6.4/ghc-8.6.4/libHSghc-8.6.4.a
+/usr/lib64/ghc-8.6.4/ghc-8.6.4/libHSghc-8.6.4_p.a
 /usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/GHC/ForeignSrcLang.dyn_hi
 /usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/GHC/ForeignSrcLang.hi
 /usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/GHC/ForeignSrcLang.p_hi
@@ -3199,6 +3220,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/GHC/Serialized.hi
 /usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/GHC/Serialized.p_hi
 /usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/HSghc-boot-8.6.4.o
+/usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/libHSghc-boot-8.6.4.a
+/usr/lib64/ghc-8.6.4/ghc-boot-8.6.4/libHSghc-boot-8.6.4_p.a
 /usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/GHC/ForeignSrcLang/Type.dyn_hi
 /usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/GHC/ForeignSrcLang/Type.hi
 /usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/GHC/ForeignSrcLang/Type.p_hi
@@ -3209,6 +3232,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/GHC/Lexeme.hi
 /usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/GHC/Lexeme.p_hi
 /usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/HSghc-boot-th-8.6.4.o
+/usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/libHSghc-boot-th-8.6.4.a
+/usr/lib64/ghc-8.6.4/ghc-boot-th-8.6.4/libHSghc-boot-th-8.6.4_p.a
 /usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/GHC/Compact.dyn_hi
 /usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/GHC/Compact.hi
 /usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/GHC/Compact.p_hi
@@ -3216,6 +3241,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/GHC/Compact/Serialized.hi
 /usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/GHC/Compact/Serialized.p_hi
 /usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/HSghc-compact-0.1.0.0.o
+/usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/libHSghc-compact-0.1.0.0.a
+/usr/lib64/ghc-8.6.4/ghc-compact-0.1.0.0/libHSghc-compact-0.1.0.0_p.a
 /usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/GHC/Exts/Heap.dyn_hi
 /usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/GHC/Exts/Heap.hi
 /usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/GHC/Exts/Heap.p_hi
@@ -3241,6 +3268,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/GHC/Exts/Heap/Utils.hi
 /usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/GHC/Exts/Heap/Utils.p_hi
 /usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/HSghc-heap-8.6.4.o
+/usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/libHSghc-heap-8.6.4.a
+/usr/lib64/ghc-8.6.4/ghc-heap-8.6.4/libHSghc-heap-8.6.4_p.a
 /usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/GHC/CString.dyn_hi
 /usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/GHC/CString.hi
 /usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/GHC/CString.p_hi
@@ -3266,6 +3295,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/GHC/Types.hi
 /usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/GHC/Types.p_hi
 /usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/HSghc-prim-0.5.3.o
+/usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/libHSghc-prim-0.5.3.a
+/usr/lib64/ghc-8.6.4/ghc-prim-0.5.3/libHSghc-prim-0.5.3_p.a
 /usr/lib64/ghc-8.6.4/ghc-usage.txt
 /usr/lib64/ghc-8.6.4/ghci-8.6.4/GHCi/BinaryArray.dyn_hi
 /usr/lib64/ghc-8.6.4/ghci-8.6.4/GHCi/BinaryArray.hi
@@ -3313,6 +3344,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/ghci-8.6.4/SizedSeq.dyn_hi
 /usr/lib64/ghc-8.6.4/ghci-8.6.4/SizedSeq.hi
 /usr/lib64/ghc-8.6.4/ghci-8.6.4/SizedSeq.p_hi
+/usr/lib64/ghc-8.6.4/ghci-8.6.4/libHSghci-8.6.4.a
+/usr/lib64/ghc-8.6.4/ghci-8.6.4/libHSghci-8.6.4_p.a
 /usr/lib64/ghc-8.6.4/ghci-usage.txt
 /usr/lib64/ghc-8.6.4/haskeline-0.7.4.3/HShaskeline-0.7.4.3.o
 /usr/lib64/ghc-8.6.4/haskeline-0.7.4.3/System/Console/Haskeline.dyn_hi
@@ -3396,6 +3429,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/haskeline-0.7.4.3/System/Console/Haskeline/Vi.dyn_hi
 /usr/lib64/ghc-8.6.4/haskeline-0.7.4.3/System/Console/Haskeline/Vi.hi
 /usr/lib64/ghc-8.6.4/haskeline-0.7.4.3/System/Console/Haskeline/Vi.p_hi
+/usr/lib64/ghc-8.6.4/haskeline-0.7.4.3/libHShaskeline-0.7.4.3.a
+/usr/lib64/ghc-8.6.4/haskeline-0.7.4.3/libHShaskeline-0.7.4.3_p.a
 /usr/lib64/ghc-8.6.4/hpc-0.6.0.3/HShpc-0.6.0.3.o
 /usr/lib64/ghc-8.6.4/hpc-0.6.0.3/Trace/Hpc/Mix.dyn_hi
 /usr/lib64/ghc-8.6.4/hpc-0.6.0.3/Trace/Hpc/Mix.hi
@@ -3409,6 +3444,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/hpc-0.6.0.3/Trace/Hpc/Util.dyn_hi
 /usr/lib64/ghc-8.6.4/hpc-0.6.0.3/Trace/Hpc/Util.hi
 /usr/lib64/ghc-8.6.4/hpc-0.6.0.3/Trace/Hpc/Util.p_hi
+/usr/lib64/ghc-8.6.4/hpc-0.6.0.3/libHShpc-0.6.0.3.a
+/usr/lib64/ghc-8.6.4/hpc-0.6.0.3/libHShpc-0.6.0.3_p.a
 /usr/lib64/ghc-8.6.4/html/Classic.theme/haskell_icon.gif
 /usr/lib64/ghc-8.6.4/html/Classic.theme/minus.gif
 /usr/lib64/ghc-8.6.4/html/Classic.theme/plus.gif
@@ -3439,6 +3476,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/integer-gmp-1.0.2.0/GHC/Integer/Type.hi
 /usr/lib64/ghc-8.6.4/integer-gmp-1.0.2.0/GHC/Integer/Type.p_hi
 /usr/lib64/ghc-8.6.4/integer-gmp-1.0.2.0/HSinteger-gmp-1.0.2.0.o
+/usr/lib64/ghc-8.6.4/integer-gmp-1.0.2.0/libHSinteger-gmp-1.0.2.0.a
+/usr/lib64/ghc-8.6.4/integer-gmp-1.0.2.0/libHSinteger-gmp-1.0.2.0_p.a
 /usr/lib64/ghc-8.6.4/latex/haddock.sty
 /usr/lib64/ghc-8.6.4/libiserv-8.6.3/GHCi/Utils.dyn_hi
 /usr/lib64/ghc-8.6.4/libiserv-8.6.3/GHCi/Utils.hi
@@ -3447,6 +3486,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/libiserv-8.6.3/Lib.dyn_hi
 /usr/lib64/ghc-8.6.4/libiserv-8.6.3/Lib.hi
 /usr/lib64/ghc-8.6.4/libiserv-8.6.3/Lib.p_hi
+/usr/lib64/ghc-8.6.4/libiserv-8.6.3/libHSlibiserv-8.6.3.a
+/usr/lib64/ghc-8.6.4/libiserv-8.6.3/libHSlibiserv-8.6.3_p.a
 /usr/lib64/ghc-8.6.4/llvm-passes
 /usr/lib64/ghc-8.6.4/llvm-targets
 /usr/lib64/ghc-8.6.4/mtl-2.2.2/Control/Monad/Cont.dyn_hi
@@ -3516,6 +3557,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/mtl-2.2.2/Control/Monad/Writer/Strict.hi
 /usr/lib64/ghc-8.6.4/mtl-2.2.2/Control/Monad/Writer/Strict.p_hi
 /usr/lib64/ghc-8.6.4/mtl-2.2.2/HSmtl-2.2.2.o
+/usr/lib64/ghc-8.6.4/mtl-2.2.2/libHSmtl-2.2.2.a
+/usr/lib64/ghc-8.6.4/mtl-2.2.2/libHSmtl-2.2.2_p.a
 /usr/lib64/ghc-8.6.4/package.conf.d/Cabal-2.4.0.1.conf
 /usr/lib64/ghc-8.6.4/package.conf.d/array-0.5.3.0.conf
 /usr/lib64/ghc-8.6.4/package.conf.d/base-4.12.0.0.conf
@@ -3627,6 +3670,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/parsec-3.1.13.0/Text/ParserCombinators/Parsec/Token.dyn_hi
 /usr/lib64/ghc-8.6.4/parsec-3.1.13.0/Text/ParserCombinators/Parsec/Token.hi
 /usr/lib64/ghc-8.6.4/parsec-3.1.13.0/Text/ParserCombinators/Parsec/Token.p_hi
+/usr/lib64/ghc-8.6.4/parsec-3.1.13.0/libHSparsec-3.1.13.0.a
+/usr/lib64/ghc-8.6.4/parsec-3.1.13.0/libHSparsec-3.1.13.0_p.a
 /usr/lib64/ghc-8.6.4/platformConstants
 /usr/lib64/ghc-8.6.4/pretty-1.1.3.6/HSpretty-1.1.3.6.o
 /usr/lib64/ghc-8.6.4/pretty-1.1.3.6/Text/PrettyPrint.dyn_hi
@@ -3647,6 +3692,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/pretty-1.1.3.6/Text/PrettyPrint/HughesPJClass.dyn_hi
 /usr/lib64/ghc-8.6.4/pretty-1.1.3.6/Text/PrettyPrint/HughesPJClass.hi
 /usr/lib64/ghc-8.6.4/pretty-1.1.3.6/Text/PrettyPrint/HughesPJClass.p_hi
+/usr/lib64/ghc-8.6.4/pretty-1.1.3.6/libHSpretty-1.1.3.6.a
+/usr/lib64/ghc-8.6.4/pretty-1.1.3.6/libHSpretty-1.1.3.6_p.a
 /usr/lib64/ghc-8.6.4/process-1.6.5.0/HSprocess-1.6.5.0.o
 /usr/lib64/ghc-8.6.4/process-1.6.5.0/System/Cmd.dyn_hi
 /usr/lib64/ghc-8.6.4/process-1.6.5.0/System/Cmd.hi
@@ -3663,6 +3710,16 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/process-1.6.5.0/System/Process/Posix.dyn_hi
 /usr/lib64/ghc-8.6.4/process-1.6.5.0/System/Process/Posix.hi
 /usr/lib64/ghc-8.6.4/process-1.6.5.0/System/Process/Posix.p_hi
+/usr/lib64/ghc-8.6.4/process-1.6.5.0/libHSprocess-1.6.5.0.a
+/usr/lib64/ghc-8.6.4/process-1.6.5.0/libHSprocess-1.6.5.0_p.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts_debug.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts_l.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts_p.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts_thr.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts_thr_debug.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts_thr_l.a
+/usr/lib64/ghc-8.6.4/rts/libHSrts_thr_p.a
 /usr/lib64/ghc-8.6.4/settings
 /usr/lib64/ghc-8.6.4/stm-2.5.0.0/Control/Concurrent/STM.dyn_hi
 /usr/lib64/ghc-8.6.4/stm-2.5.0.0/Control/Concurrent/STM.hi
@@ -3695,6 +3752,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/stm-2.5.0.0/Control/Sequential/STM.hi
 /usr/lib64/ghc-8.6.4/stm-2.5.0.0/Control/Sequential/STM.p_hi
 /usr/lib64/ghc-8.6.4/stm-2.5.0.0/HSstm-2.5.0.0.o
+/usr/lib64/ghc-8.6.4/stm-2.5.0.0/libHSstm-2.5.0.0.a
+/usr/lib64/ghc-8.6.4/stm-2.5.0.0/libHSstm-2.5.0.0_p.a
 /usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/HStemplate-haskell-2.14.0.0.o
 /usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/Language/Haskell/TH.dyn_hi
 /usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/Language/Haskell/TH.hi
@@ -3723,6 +3782,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/Language/Haskell/TH/Syntax.dyn_hi
 /usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/Language/Haskell/TH/Syntax.hi
 /usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/Language/Haskell/TH/Syntax.p_hi
+/usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/libHStemplate-haskell-2.14.0.0.a
+/usr/lib64/ghc-8.6.4/template-haskell-2.14.0.0/libHStemplate-haskell-2.14.0.0_p.a
 /usr/lib64/ghc-8.6.4/template-hsc.h
 /usr/lib64/ghc-8.6.4/terminfo-0.4.1.2/HSterminfo-0.4.1.2.o
 /usr/lib64/ghc-8.6.4/terminfo-0.4.1.2/System/Console/Terminfo.dyn_hi
@@ -3746,6 +3807,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/terminfo-0.4.1.2/System/Console/Terminfo/Keys.dyn_hi
 /usr/lib64/ghc-8.6.4/terminfo-0.4.1.2/System/Console/Terminfo/Keys.hi
 /usr/lib64/ghc-8.6.4/terminfo-0.4.1.2/System/Console/Terminfo/Keys.p_hi
+/usr/lib64/ghc-8.6.4/terminfo-0.4.1.2/libHSterminfo-0.4.1.2.a
+/usr/lib64/ghc-8.6.4/terminfo-0.4.1.2/libHSterminfo-0.4.1.2_p.a
 /usr/lib64/ghc-8.6.4/text-1.2.3.1/Data/Text.dyn_hi
 /usr/lib64/ghc-8.6.4/text-1.2.3.1/Data/Text.hi
 /usr/lib64/ghc-8.6.4/text-1.2.3.1/Data/Text.p_hi
@@ -3879,6 +3942,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/text-1.2.3.1/Data/Text/Unsafe.hi
 /usr/lib64/ghc-8.6.4/text-1.2.3.1/Data/Text/Unsafe.p_hi
 /usr/lib64/ghc-8.6.4/text-1.2.3.1/HStext-1.2.3.1.o
+/usr/lib64/ghc-8.6.4/text-1.2.3.1/libHStext-1.2.3.1.a
+/usr/lib64/ghc-8.6.4/text-1.2.3.1/libHStext-1.2.3.1_p.a
 /usr/lib64/ghc-8.6.4/time-1.8.0.2/Data/Time.dyn_hi
 /usr/lib64/ghc-8.6.4/time-1.8.0.2/Data/Time.hi
 /usr/lib64/ghc-8.6.4/time-1.8.0.2/Data/Time.p_hi
@@ -3979,6 +4044,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/time-1.8.0.2/Data/Time/LocalTime/Internal/ZonedTime.hi
 /usr/lib64/ghc-8.6.4/time-1.8.0.2/Data/Time/LocalTime/Internal/ZonedTime.p_hi
 /usr/lib64/ghc-8.6.4/time-1.8.0.2/HStime-1.8.0.2.o
+/usr/lib64/ghc-8.6.4/time-1.8.0.2/libHStime-1.8.0.2.a
+/usr/lib64/ghc-8.6.4/time-1.8.0.2/libHStime-1.8.0.2_p.a
 /usr/lib64/ghc-8.6.4/transformers-0.5.6.2/Control/Applicative/Backwards.dyn_hi
 /usr/lib64/ghc-8.6.4/transformers-0.5.6.2/Control/Applicative/Backwards.hi
 /usr/lib64/ghc-8.6.4/transformers-0.5.6.2/Control/Applicative/Backwards.p_hi
@@ -4058,6 +4125,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/transformers-0.5.6.2/Data/Functor/Reverse.hi
 /usr/lib64/ghc-8.6.4/transformers-0.5.6.2/Data/Functor/Reverse.p_hi
 /usr/lib64/ghc-8.6.4/transformers-0.5.6.2/HStransformers-0.5.6.2.o
+/usr/lib64/ghc-8.6.4/transformers-0.5.6.2/libHStransformers-0.5.6.2.a
+/usr/lib64/ghc-8.6.4/transformers-0.5.6.2/libHStransformers-0.5.6.2_p.a
 /usr/lib64/ghc-8.6.4/unix-2.7.2.2/HSunix-2.7.2.2.o
 /usr/lib64/ghc-8.6.4/unix-2.7.2.2/System/Posix.dyn_hi
 /usr/lib64/ghc-8.6.4/unix-2.7.2.2/System/Posix.hi
@@ -4176,6 +4245,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/unix-2.7.2.2/System/Posix/User.dyn_hi
 /usr/lib64/ghc-8.6.4/unix-2.7.2.2/System/Posix/User.hi
 /usr/lib64/ghc-8.6.4/unix-2.7.2.2/System/Posix/User.p_hi
+/usr/lib64/ghc-8.6.4/unix-2.7.2.2/libHSunix-2.7.2.2.a
+/usr/lib64/ghc-8.6.4/unix-2.7.2.2/libHSunix-2.7.2.2_p.a
 /usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/HSxhtml-3000.2.2.1.o
 /usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/Text/XHtml.dyn_hi
 /usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/Text/XHtml.hi
@@ -4222,6 +4293,8 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 /usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/Text/XHtml/Transitional/Elements.dyn_hi
 /usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/Text/XHtml/Transitional/Elements.hi
 /usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/Text/XHtml/Transitional/Elements.p_hi
+/usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/libHSxhtml-3000.2.2.1.a
+/usr/lib64/ghc-8.6.4/xhtml-3000.2.2.1/libHSxhtml-3000.2.2.1_p.a
 
 %files bin
 %defattr(-,root,root,-)
