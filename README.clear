@@ -3,17 +3,17 @@ BOOTSTRAPPING PROCESS
 
 The bootstrap was performed by doing the following:
 1. Run a current Fedora Docker container.  Have a folder mounted from host to container for downloading RPMs.
-2. Use dnf to download ghc and all dependencies to mounted folder.
+2. Use dnf to download ghc and all dependent RPMs to mounted folder
 3. Exit container
 4. Extract all ghc-* RPMs
 5. Remove etc and var folders from extraction
-6. Copy install extracted usr folder to /
-7. Run ghc-pkg recache
-8. Copy system package cache into corresponding extracted usr folder.  This can be found in the same directory as the package.cache.lock file.
-9. Tar up extracted usr folder from RPM extraction.
-10. Create a spec file that extracts the tarball and installs the usr folder into the build dest root.
+6. Copy install extracted usr folder to / on host
+7. Run ghc-pkg recache on host
+8. Copy host package cache into corresponding extracted usr folder.  This can be found in the same directory as the package.cache.lock file.
+9. Tar up extracted usr folder from RPM extraction
+10. Create a spec file that extracts the tarball and installs the usr folder into the build dest root
 11. Build the spec file
-12. Get list of missing files from build.log, remove extra text that is not a missing file, sed replace leading spaces, and then sort unique append the list to the spec file.
+12. Get list of missing files from build.log, remove extra text that is not a missing file, sed replace leading spaces, and then sort unique append the list to the spec file
 13. Rebuild the spec file
 14. Run make repoadd
 * You have bootstrapped GHC for building
@@ -46,9 +46,9 @@ Commentary
 ----------
 
 The important bits here are to not use the binary distribution from the website
-because it has problems linking statically, which the build process will
-inherently try to do.  There are options to try to influence this and change
-the behavior to dynamic linking, but they are either EOL'd or not fully
+because it has problems linking statically, which the build process for ghc
+will inherently try to do.  There are options to try to influence this and
+change the behavior to dynamic linking, but they are either EOL'd or not fully
 supported yet.
 
 Instead, the solution is to use an existing pre-built one from a distrubtion
@@ -71,27 +71,33 @@ During configure, this command is run and the output is checked against the
 target platform.  If they don't match, configure errors out saying that the
 desired platform does not match the GHC platform.
 
-Do not use the configure option --enable-distro-toolchain.  This is misleading
-because it will try to use touchy.exe rather than touch, which is a Windows
-executable that does not exist on Linux.
+Do not use the configure option --enable-distro-toolchain.  While this seems
+like a good idea, it doesn't work well because it will try to use touchy.exe,
+which is a Windows executable that does not exist on Linux, rather than touch.
 
 The configure option --disable-ld-override is required in order for ghci cabal
-to properly resolve the linker location.
+to properly resolve the linker location.  The build process also expects the
+gold linker to be around.
 
 The libffi include dir is not being properly passed through the build process.
-A patch is required to correct this.  This patch is required because libffi is
-packaged to store dev headers in a non-standard location.  While this should
-not be an issue because libffi offers a pkg-config file, ghc does not use
-pkg-config to identify from where to find the dev headers.
+A patch is required to correct this, and a pull request is open for this
+upstream.  While this should not be an issue because libffi offers a pkg-config
+file to handle referencing its header in a non-standard location, ghc does not
+use pkg-config to identify from where to find the dev headers.
 
 APPROACH
 ========
 
-Because the build system for ghc follows autotools, and creates files in
-semi-standard locations, this package should be able to be autospec'd.
-Instructions on building may be found here in the 'Building & Installing'
-section: https://gitlab.haskell.org/ghc/ghc
+Because the build system for ghc follows autotools and it creates files in
+semi-standard locations, this package can be autospec'd.  Instructions on
+building may be found here in the 'Building & Installing' section:
+https://gitlab.haskell.org/ghc/ghc
 
-However, there are plans to eventually drop autotools and in its place use
-their own custom buld system, hadrian.  It is currently not ready today and is
-in development.
+After being autospec'd, the results came out very well for a first run.
+Perhaps one place where the packaging can be improved is to move all of the
+static libraries into the lib package since these are needed to build haskell
+programs by default.  Dynamic linking is not turned on by default.
+
+There are plans to eventually drop autotools and in its place use their own
+custom buld system, hadrian.  It is currently not ready today and is in
+development.
