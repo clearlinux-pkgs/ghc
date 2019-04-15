@@ -7,7 +7,7 @@
 %define keepstatic 1
 Name     : ghc
 Version  : 8.6.4
-Release  : 7
+Release  : 8
 URL      : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source0  : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source99 : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
@@ -18,8 +18,8 @@ Requires: ghc-bin = %{version}-%{release}
 Requires: ghc-lib = %{version}-%{release}
 Requires: ghc-license = %{version}-%{release}
 Requires: ghc-man = %{version}-%{release}
-Requires: gmp
-Requires: libffi
+Requires: gmp-dev
+Requires: libffi-dev
 BuildRequires : Sphinx
 BuildRequires : binutils-extras
 BuildRequires : elfutils-dev
@@ -104,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555360252
+export SOURCE_DATE_EPOCH=1555362699
 export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure  --target=x86_64-unknown-linux \
 --host=x86_64-unknown-linux \
@@ -115,7 +115,7 @@ export LDFLAGS="${LDFLAGS} -fno-lto"
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1555360252
+export SOURCE_DATE_EPOCH=1555362699
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ghc
 cp LICENSE %{buildroot}/usr/share/package-licenses/ghc/LICENSE
