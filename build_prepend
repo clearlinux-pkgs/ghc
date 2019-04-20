@@ -1,3 +1,1 @@
-cp mk/build.mk.sample mk/build.mk
-sed -i 's/^#BuildFlavour = perf$/BuildFlavour = perf/' mk/build.mk
 ./boot
