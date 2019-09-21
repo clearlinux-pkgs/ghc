@@ -8,9 +8,9 @@
 Name     : ghc
 Version  : 8.6.4
 Release  : 9
-URL      : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
-Source0  : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz
-Source99 : https://downloads.haskell.org/~ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
+URL      : https://downloads.haskell.org/ghc/8.6.4/ghc-8.6.4-src.tar.xz
+Source0  : https://downloads.haskell.org/ghc/8.6.4/ghc-8.6.4-src.tar.xz
+Source99 : https://downloads.haskell.org/ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause BSD-3-Clause-Clear CC-BY-SA-4.0 MIT NCSA
