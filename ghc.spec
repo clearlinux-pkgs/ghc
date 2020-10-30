@@ -7,10 +7,10 @@
 %define keepstatic 1
 Name     : ghc
 Version  : 8.6.4
-Release  : 9
+Release  : 10
 URL      : https://downloads.haskell.org/ghc/8.6.4/ghc-8.6.4-src.tar.xz
 Source0  : https://downloads.haskell.org/ghc/8.6.4/ghc-8.6.4-src.tar.xz
-Source99 : https://downloads.haskell.org/ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
+Source1  : https://downloads.haskell.org/ghc/8.6.4/ghc-8.6.4-src.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause BSD-3-Clause-Clear CC-BY-SA-4.0 MIT NCSA
@@ -94,6 +94,7 @@ man components for the ghc package.
 
 %prep
 %setup -q -n ghc-8.6.4
+cd %{_builddir}/ghc-8.6.4
 %patch1 -p1
 
 %build
@@ -103,9 +104,13 @@ man components for the ghc package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1555362699
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604097813
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure  --target=x86_64-unknown-linux \
 --host=x86_64-unknown-linux \
 --build=x86_64-unknown-linux \
@@ -115,61 +120,61 @@ export LDFLAGS="${LDFLAGS} -fno-lto"
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1555362699
+export SOURCE_DATE_EPOCH=1604097813
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ghc
-cp LICENSE %{buildroot}/usr/share/package-licenses/ghc/LICENSE
-cp compiler/LICENSE %{buildroot}/usr/share/package-licenses/ghc/compiler_LICENSE
-cp docs/users_guide/license.rst %{buildroot}/usr/share/package-licenses/ghc/docs_users_guide_license.rst
-cp libffi-tarballs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libffi-tarballs_LICENSE
-cp libraries/Cabal/Cabal/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_Cabal_LICENSE
-cp libraries/Cabal/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_LICENSE
-cp libraries/Cabal/cabal-dev-scripts/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_cabal-dev-scripts_LICENSE
-cp libraries/Cabal/cabal-install/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_cabal-install_LICENSE
-cp libraries/Cabal/cabal-testsuite/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_cabal-testsuite_LICENSE
-cp libraries/Cabal/cabal-testsuite/PackageTests/HaddockNewline/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_cabal-testsuite_PackageTests_HaddockNewline_LICENSE
-cp libraries/Cabal/pretty-show-1.6.16/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_pretty-show-1.6.16_LICENSE
-cp libraries/Cabal/solver-benchmarks/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Cabal_solver-benchmarks_LICENSE
-cp libraries/Win32/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_Win32_LICENSE
-cp libraries/array/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_array_LICENSE
-cp libraries/base/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_base_LICENSE
-cp libraries/binary/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_binary_LICENSE
-cp libraries/bytestring/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_bytestring_LICENSE
-cp libraries/bytestring/bench/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_bytestring_bench_LICENSE
-cp libraries/containers/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_containers_LICENSE
-cp libraries/deepseq/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_deepseq_LICENSE
-cp libraries/directory/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_directory_LICENSE
-cp libraries/filepath/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_filepath_LICENSE
-cp libraries/ghc-boot-th/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_ghc-boot-th_LICENSE
-cp libraries/ghc-boot/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_ghc-boot_LICENSE
-cp libraries/ghc-compact/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_ghc-compact_LICENSE
-cp libraries/ghc-heap/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_ghc-heap_LICENSE
-cp libraries/ghc-prim/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_ghc-prim_LICENSE
-cp libraries/ghci/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_ghci_LICENSE
-cp libraries/haskeline/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_haskeline_LICENSE
-cp libraries/hpc/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_hpc_LICENSE
-cp libraries/integer-gmp/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_integer-gmp_LICENSE
-cp libraries/integer-simple/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_integer-simple_LICENSE
-cp libraries/libiserv/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_libiserv_LICENSE
-cp libraries/mtl/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_mtl_LICENSE
-cp libraries/parsec/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_parsec_LICENSE
-cp libraries/pretty/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_pretty_LICENSE
-cp libraries/process/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_process_LICENSE
-cp libraries/stm/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_stm_LICENSE
-cp libraries/template-haskell/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_template-haskell_LICENSE
-cp libraries/terminfo/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_terminfo_LICENSE
-cp libraries/text/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_text_LICENSE
-cp libraries/time/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_time_LICENSE
-cp libraries/transformers/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_transformers_LICENSE
-cp libraries/unix/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_unix_LICENSE
-cp libraries/xhtml/LICENSE %{buildroot}/usr/share/package-licenses/ghc/libraries_xhtml_LICENSE
-cp rts/linker/ELFRelocs/LICENSE-LLVM.TXT %{buildroot}/usr/share/package-licenses/ghc/rts_linker_ELFRelocs_LICENSE-LLVM.TXT
-cp utils/compare_sizes/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_compare_sizes_LICENSE
-cp utils/haddock/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_haddock_LICENSE
-cp utils/haddock/doc/cheatsheet/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_haddock_doc_cheatsheet_LICENSE
-cp utils/haddock/haddock-api/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_haddock_haddock-api_LICENSE
-cp utils/haddock/haddock-library/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_haddock_haddock-library_LICENSE
-cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs_LICENSE
+cp %{_builddir}/ghc-8.6.4/LICENSE %{buildroot}/usr/share/package-licenses/ghc/fa704d9febebc220e50ffb89a2a0057e5a80c437
+cp %{_builddir}/ghc-8.6.4/compiler/LICENSE %{buildroot}/usr/share/package-licenses/ghc/fa704d9febebc220e50ffb89a2a0057e5a80c437
+cp %{_builddir}/ghc-8.6.4/docs/users_guide/license.rst %{buildroot}/usr/share/package-licenses/ghc/83332aa617c395c97aa651792748f9b1c7863853
+cp %{_builddir}/ghc-8.6.4/libffi-tarballs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/2c938b2fe439b3d78ca579e5fc5cf49b3218c0ab
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/Cabal/LICENSE %{buildroot}/usr/share/package-licenses/ghc/1e9f59d4db8bcb0b539afa3916d23a258b241e57
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/LICENSE %{buildroot}/usr/share/package-licenses/ghc/043b4619621ba655603e7586476de3d74a36c224
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/cabal-dev-scripts/LICENSE %{buildroot}/usr/share/package-licenses/ghc/de448498e89f51224cfc2930224dc8c4027b2346
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/cabal-install/LICENSE %{buildroot}/usr/share/package-licenses/ghc/1e9f59d4db8bcb0b539afa3916d23a258b241e57
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/cabal-testsuite/LICENSE %{buildroot}/usr/share/package-licenses/ghc/1e9f59d4db8bcb0b539afa3916d23a258b241e57
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/cabal-testsuite/PackageTests/HaddockNewline/LICENSE %{buildroot}/usr/share/package-licenses/ghc/8ed381b89adc041e8bafdcd7c19e1e0955ac2665
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/pretty-show-1.6.16/LICENSE %{buildroot}/usr/share/package-licenses/ghc/2c7d9d841de66824cd7202c9cb30847b1be51dbb
+cp %{_builddir}/ghc-8.6.4/libraries/Cabal/solver-benchmarks/LICENSE %{buildroot}/usr/share/package-licenses/ghc/1e9f59d4db8bcb0b539afa3916d23a258b241e57
+cp %{_builddir}/ghc-8.6.4/libraries/Win32/LICENSE %{buildroot}/usr/share/package-licenses/ghc/0eb0eb4f7e1d48a691ff42f5a5cfc8e8642f7bcb
+cp %{_builddir}/ghc-8.6.4/libraries/array/LICENSE %{buildroot}/usr/share/package-licenses/ghc/820a2190c7ceb48f2056bf251f489d7013edf22d
+cp %{_builddir}/ghc-8.6.4/libraries/base/LICENSE %{buildroot}/usr/share/package-licenses/ghc/820a2190c7ceb48f2056bf251f489d7013edf22d
+cp %{_builddir}/ghc-8.6.4/libraries/binary/LICENSE %{buildroot}/usr/share/package-licenses/ghc/f7b1721af89cc4fc631448065b567f5f8b88e516
+cp %{_builddir}/ghc-8.6.4/libraries/bytestring/LICENSE %{buildroot}/usr/share/package-licenses/ghc/b2636ff63518303968e62e8cbfbbff2d4e679176
+cp %{_builddir}/ghc-8.6.4/libraries/bytestring/bench/LICENSE %{buildroot}/usr/share/package-licenses/ghc/b2636ff63518303968e62e8cbfbbff2d4e679176
+cp %{_builddir}/ghc-8.6.4/libraries/containers/LICENSE %{buildroot}/usr/share/package-licenses/ghc/04aed90434f3a41e0bb4e420bf4986268209b414
+cp %{_builddir}/ghc-8.6.4/libraries/deepseq/LICENSE %{buildroot}/usr/share/package-licenses/ghc/ffd56a3b1773c26790090d6e9d51f7d6d79ba5ec
+cp %{_builddir}/ghc-8.6.4/libraries/directory/LICENSE %{buildroot}/usr/share/package-licenses/ghc/b60790d8708e27772de58c9bf9760639a39702ef
+cp %{_builddir}/ghc-8.6.4/libraries/filepath/LICENSE %{buildroot}/usr/share/package-licenses/ghc/6ad171a55da286586f31f891b6924fd3eefdbee5
+cp %{_builddir}/ghc-8.6.4/libraries/ghc-boot-th/LICENSE %{buildroot}/usr/share/package-licenses/ghc/fa704d9febebc220e50ffb89a2a0057e5a80c437
+cp %{_builddir}/ghc-8.6.4/libraries/ghc-boot/LICENSE %{buildroot}/usr/share/package-licenses/ghc/fa704d9febebc220e50ffb89a2a0057e5a80c437
+cp %{_builddir}/ghc-8.6.4/libraries/ghc-compact/LICENSE %{buildroot}/usr/share/package-licenses/ghc/e794af95df1f048f50127e64d6225e681d29fbc2
+cp %{_builddir}/ghc-8.6.4/libraries/ghc-heap/LICENSE %{buildroot}/usr/share/package-licenses/ghc/e63ece42053d1811427091a96ee6b73f3bd9320e
+cp %{_builddir}/ghc-8.6.4/libraries/ghc-prim/LICENSE %{buildroot}/usr/share/package-licenses/ghc/6290dc0c98bc62542cb66ad536a222de68c45e59
+cp %{_builddir}/ghc-8.6.4/libraries/ghci/LICENSE %{buildroot}/usr/share/package-licenses/ghc/cc5e5de3b12d8f9c553aa818e811c5479f65b813
+cp %{_builddir}/ghc-8.6.4/libraries/haskeline/LICENSE %{buildroot}/usr/share/package-licenses/ghc/6726bafe7295998067b0c6abc803063e7cd5f46c
+cp %{_builddir}/ghc-8.6.4/libraries/hpc/LICENSE %{buildroot}/usr/share/package-licenses/ghc/597669d932d3cd97501b2ef99ab9969ee055e282
+cp %{_builddir}/ghc-8.6.4/libraries/integer-gmp/LICENSE %{buildroot}/usr/share/package-licenses/ghc/c7da274ac72be9ef10ff1c373c886317d9f0f361
+cp %{_builddir}/ghc-8.6.4/libraries/integer-simple/LICENSE %{buildroot}/usr/share/package-licenses/ghc/1da3f8e8f58846ab70c802e9b63e539303477867
+cp %{_builddir}/ghc-8.6.4/libraries/libiserv/LICENSE %{buildroot}/usr/share/package-licenses/ghc/6290dc0c98bc62542cb66ad536a222de68c45e59
+cp %{_builddir}/ghc-8.6.4/libraries/mtl/LICENSE %{buildroot}/usr/share/package-licenses/ghc/04aed90434f3a41e0bb4e420bf4986268209b414
+cp %{_builddir}/ghc-8.6.4/libraries/parsec/LICENSE %{buildroot}/usr/share/package-licenses/ghc/951674d5b499a822ee6eef4a31dd91cc05a37e07
+cp %{_builddir}/ghc-8.6.4/libraries/pretty/LICENSE %{buildroot}/usr/share/package-licenses/ghc/f6752683e84a15d48e20bffbd5e01441d918a3dd
+cp %{_builddir}/ghc-8.6.4/libraries/process/LICENSE %{buildroot}/usr/share/package-licenses/ghc/20dfec29351080dd7eb5c4b3adcaa1d21f32d404
+cp %{_builddir}/ghc-8.6.4/libraries/stm/LICENSE %{buildroot}/usr/share/package-licenses/ghc/6492c527d77467ee09f98f11f6647c2a79976ee9
+cp %{_builddir}/ghc-8.6.4/libraries/template-haskell/LICENSE %{buildroot}/usr/share/package-licenses/ghc/5e65a7d6c19c685672421327d6ac5bfbf71ca750
+cp %{_builddir}/ghc-8.6.4/libraries/terminfo/LICENSE %{buildroot}/usr/share/package-licenses/ghc/730e77f5beb8c6339790e87ef0f13b5fd24df251
+cp %{_builddir}/ghc-8.6.4/libraries/text/LICENSE %{buildroot}/usr/share/package-licenses/ghc/1e38b054a05c3e56deca64e3f62b36556e8682d3
+cp %{_builddir}/ghc-8.6.4/libraries/time/LICENSE %{buildroot}/usr/share/package-licenses/ghc/47a59c47713076693584def17cd7fae93b229ab2
+cp %{_builddir}/ghc-8.6.4/libraries/transformers/LICENSE %{buildroot}/usr/share/package-licenses/ghc/04aed90434f3a41e0bb4e420bf4986268209b414
+cp %{_builddir}/ghc-8.6.4/libraries/unix/LICENSE %{buildroot}/usr/share/package-licenses/ghc/6492c527d77467ee09f98f11f6647c2a79976ee9
+cp %{_builddir}/ghc-8.6.4/libraries/xhtml/LICENSE %{buildroot}/usr/share/package-licenses/ghc/97fc244790e88f6c4354476c6e9dbc52a8ef2316
+cp %{_builddir}/ghc-8.6.4/rts/linker/ELFRelocs/LICENSE-LLVM.TXT %{buildroot}/usr/share/package-licenses/ghc/53482f798316d2f642b51168e892a854c16291f6
+cp %{_builddir}/ghc-8.6.4/utils/compare_sizes/LICENSE %{buildroot}/usr/share/package-licenses/ghc/fa704d9febebc220e50ffb89a2a0057e5a80c437
+cp %{_builddir}/ghc-8.6.4/utils/haddock/LICENSE %{buildroot}/usr/share/package-licenses/ghc/f08507e21b3caad405d55b95fb2182a5ad99ad3c
+cp %{_builddir}/ghc-8.6.4/utils/haddock/doc/cheatsheet/LICENSE %{buildroot}/usr/share/package-licenses/ghc/8f551a766d1f4556d1a2596365c0fc2191366efa
+cp %{_builddir}/ghc-8.6.4/utils/haddock/haddock-api/LICENSE %{buildroot}/usr/share/package-licenses/ghc/f08507e21b3caad405d55b95fb2182a5ad99ad3c
+cp %{_builddir}/ghc-8.6.4/utils/haddock/haddock-library/LICENSE %{buildroot}/usr/share/package-licenses/ghc/f08507e21b3caad405d55b95fb2182a5ad99ad3c
+cp %{_builddir}/ghc-8.6.4/utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/fa704d9febebc220e50ffb89a2a0057e5a80c437
 %make_install
 
 %files
@@ -4448,58 +4453,42 @@ cp utils/hsc2hs/LICENSE %{buildroot}/usr/share/package-licenses/ghc/utils_hsc2hs
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/ghc/LICENSE
-/usr/share/package-licenses/ghc/compiler_LICENSE
-/usr/share/package-licenses/ghc/docs_users_guide_license.rst
-/usr/share/package-licenses/ghc/libffi-tarballs_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_Cabal_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_cabal-dev-scripts_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_cabal-install_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_cabal-testsuite_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_cabal-testsuite_PackageTests_HaddockNewline_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_pretty-show-1.6.16_LICENSE
-/usr/share/package-licenses/ghc/libraries_Cabal_solver-benchmarks_LICENSE
-/usr/share/package-licenses/ghc/libraries_Win32_LICENSE
-/usr/share/package-licenses/ghc/libraries_array_LICENSE
-/usr/share/package-licenses/ghc/libraries_base_LICENSE
-/usr/share/package-licenses/ghc/libraries_binary_LICENSE
-/usr/share/package-licenses/ghc/libraries_bytestring_LICENSE
-/usr/share/package-licenses/ghc/libraries_bytestring_bench_LICENSE
-/usr/share/package-licenses/ghc/libraries_containers_LICENSE
-/usr/share/package-licenses/ghc/libraries_deepseq_LICENSE
-/usr/share/package-licenses/ghc/libraries_directory_LICENSE
-/usr/share/package-licenses/ghc/libraries_filepath_LICENSE
-/usr/share/package-licenses/ghc/libraries_ghc-boot-th_LICENSE
-/usr/share/package-licenses/ghc/libraries_ghc-boot_LICENSE
-/usr/share/package-licenses/ghc/libraries_ghc-compact_LICENSE
-/usr/share/package-licenses/ghc/libraries_ghc-heap_LICENSE
-/usr/share/package-licenses/ghc/libraries_ghc-prim_LICENSE
-/usr/share/package-licenses/ghc/libraries_ghci_LICENSE
-/usr/share/package-licenses/ghc/libraries_haskeline_LICENSE
-/usr/share/package-licenses/ghc/libraries_hpc_LICENSE
-/usr/share/package-licenses/ghc/libraries_integer-gmp_LICENSE
-/usr/share/package-licenses/ghc/libraries_integer-simple_LICENSE
-/usr/share/package-licenses/ghc/libraries_libiserv_LICENSE
-/usr/share/package-licenses/ghc/libraries_mtl_LICENSE
-/usr/share/package-licenses/ghc/libraries_parsec_LICENSE
-/usr/share/package-licenses/ghc/libraries_pretty_LICENSE
-/usr/share/package-licenses/ghc/libraries_process_LICENSE
-/usr/share/package-licenses/ghc/libraries_stm_LICENSE
-/usr/share/package-licenses/ghc/libraries_template-haskell_LICENSE
-/usr/share/package-licenses/ghc/libraries_terminfo_LICENSE
-/usr/share/package-licenses/ghc/libraries_text_LICENSE
-/usr/share/package-licenses/ghc/libraries_time_LICENSE
-/usr/share/package-licenses/ghc/libraries_transformers_LICENSE
-/usr/share/package-licenses/ghc/libraries_unix_LICENSE
-/usr/share/package-licenses/ghc/libraries_xhtml_LICENSE
-/usr/share/package-licenses/ghc/rts_linker_ELFRelocs_LICENSE-LLVM.TXT
-/usr/share/package-licenses/ghc/utils_compare_sizes_LICENSE
-/usr/share/package-licenses/ghc/utils_haddock_LICENSE
-/usr/share/package-licenses/ghc/utils_haddock_doc_cheatsheet_LICENSE
-/usr/share/package-licenses/ghc/utils_haddock_haddock-api_LICENSE
-/usr/share/package-licenses/ghc/utils_haddock_haddock-library_LICENSE
-/usr/share/package-licenses/ghc/utils_hsc2hs_LICENSE
+/usr/share/package-licenses/ghc/043b4619621ba655603e7586476de3d74a36c224
+/usr/share/package-licenses/ghc/04aed90434f3a41e0bb4e420bf4986268209b414
+/usr/share/package-licenses/ghc/0eb0eb4f7e1d48a691ff42f5a5cfc8e8642f7bcb
+/usr/share/package-licenses/ghc/1da3f8e8f58846ab70c802e9b63e539303477867
+/usr/share/package-licenses/ghc/1e38b054a05c3e56deca64e3f62b36556e8682d3
+/usr/share/package-licenses/ghc/1e9f59d4db8bcb0b539afa3916d23a258b241e57
+/usr/share/package-licenses/ghc/20dfec29351080dd7eb5c4b3adcaa1d21f32d404
+/usr/share/package-licenses/ghc/2c7d9d841de66824cd7202c9cb30847b1be51dbb
+/usr/share/package-licenses/ghc/2c938b2fe439b3d78ca579e5fc5cf49b3218c0ab
+/usr/share/package-licenses/ghc/47a59c47713076693584def17cd7fae93b229ab2
+/usr/share/package-licenses/ghc/53482f798316d2f642b51168e892a854c16291f6
+/usr/share/package-licenses/ghc/597669d932d3cd97501b2ef99ab9969ee055e282
+/usr/share/package-licenses/ghc/5e65a7d6c19c685672421327d6ac5bfbf71ca750
+/usr/share/package-licenses/ghc/6290dc0c98bc62542cb66ad536a222de68c45e59
+/usr/share/package-licenses/ghc/6492c527d77467ee09f98f11f6647c2a79976ee9
+/usr/share/package-licenses/ghc/6726bafe7295998067b0c6abc803063e7cd5f46c
+/usr/share/package-licenses/ghc/6ad171a55da286586f31f891b6924fd3eefdbee5
+/usr/share/package-licenses/ghc/730e77f5beb8c6339790e87ef0f13b5fd24df251
+/usr/share/package-licenses/ghc/820a2190c7ceb48f2056bf251f489d7013edf22d
+/usr/share/package-licenses/ghc/83332aa617c395c97aa651792748f9b1c7863853
+/usr/share/package-licenses/ghc/8ed381b89adc041e8bafdcd7c19e1e0955ac2665
+/usr/share/package-licenses/ghc/8f551a766d1f4556d1a2596365c0fc2191366efa
+/usr/share/package-licenses/ghc/951674d5b499a822ee6eef4a31dd91cc05a37e07
+/usr/share/package-licenses/ghc/97fc244790e88f6c4354476c6e9dbc52a8ef2316
+/usr/share/package-licenses/ghc/b2636ff63518303968e62e8cbfbbff2d4e679176
+/usr/share/package-licenses/ghc/b60790d8708e27772de58c9bf9760639a39702ef
+/usr/share/package-licenses/ghc/c7da274ac72be9ef10ff1c373c886317d9f0f361
+/usr/share/package-licenses/ghc/cc5e5de3b12d8f9c553aa818e811c5479f65b813
+/usr/share/package-licenses/ghc/de448498e89f51224cfc2930224dc8c4027b2346
+/usr/share/package-licenses/ghc/e63ece42053d1811427091a96ee6b73f3bd9320e
+/usr/share/package-licenses/ghc/e794af95df1f048f50127e64d6225e681d29fbc2
+/usr/share/package-licenses/ghc/f08507e21b3caad405d55b95fb2182a5ad99ad3c
+/usr/share/package-licenses/ghc/f6752683e84a15d48e20bffbd5e01441d918a3dd
+/usr/share/package-licenses/ghc/f7b1721af89cc4fc631448065b567f5f8b88e516
+/usr/share/package-licenses/ghc/fa704d9febebc220e50ffb89a2a0057e5a80c437
+/usr/share/package-licenses/ghc/ffd56a3b1773c26790090d6e9d51f7d6d79ba5ec
 
 %files man
 %defattr(0644,root,root,0755)

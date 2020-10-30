@@ -1,8 +1,9 @@
 Configure miss: gfind
 Configure miss: x86_64-unknown-linux-windres
+Configure miss: windres
 Configure miss: x86_64-unknown-linux-dllwrap
+Configure miss: dllwrap
 Configure miss: x86_64-unknown-linux-objdump
-Configure miss: /usr/bin/gcc option to accept ISO C99
 Configure miss: x86_64-unknown-linux-ld
 Configure miss: whether ld understands -filelist
 Configure miss: x86_64-unknown-linux-strip
@@ -45,6 +46,7 @@ Configure miss: whether float word order is big endian
 Configure miss: leading underscore in symbol names
 Configure miss: printf$LDBLStub
 Configure miss: whether -lpthread is needed for pthreads... checking for pthread_create
+Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
 Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
 Configure miss: whether GCC supports __atomic_ builtins
 Configure miss: /usr/lib64/ccache/bin/gcc option to accept ISO C89
