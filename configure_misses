@@ -90,7 +90,6 @@ Configure miss: whether to use in-tree GMP
 Configure miss: windres
 Configure miss: winsock.h
 Configure miss: winsock.h
-Configure miss: x86_64-unknown-linux-ar
 Configure miss: x86_64-unknown-linux-clang
 Configure miss: x86_64-unknown-linux-dllwrap
 Configure miss: x86_64-unknown-linux-install_name_tool
