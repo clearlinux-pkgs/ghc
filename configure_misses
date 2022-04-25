@@ -80,6 +80,9 @@ Configure miss: sys/event.h
 Configure miss: sys/timers.h
 Configure miss: sys/timers.h
 Configure miss: time
+Configure miss: whether  CC supports --target
+Configure miss: whether -latomic is needed for 64-bit atomic operations
+Configure miss: whether -latomic is needed for sub-word-sized atomic operations
 Configure miss: whether C compiler has an LLVM back end
 Configure miss: whether POSIX_SPAWN_SETSID_NP is declared
 Configure miss: whether altzone is declared
